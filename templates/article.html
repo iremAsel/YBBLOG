@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+{% if article %}
+<br><br><br>
+<h2>{{article.1}}</h2>
+<hr>
+Yazar : {{article.2}}
+<hr>
+Tarih : {{article.4}}
+<hr>
+{{article.3|safe}}
+{% else %}
+
+<div class="alert alert-warning">
+    Makale Bulunamadı.
+</div>
+{% endif %}
+
+{% endblock body %}
