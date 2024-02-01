@@ -270,8 +270,8 @@ def uptade(id):
         else:
             article = cursor.fetchone()
             form = ArticleForm()
-            form.title.data = article[0]  # Birinci sütun: title
-            form.content.data = article[1]  # İkinci sütun: content
+            form.title.data = article[1]  # Birinci sütun: title
+            form.content.data = article[3]  # İkinci sütun: content
 
             return render_template("update.html",form=form)
     else:
