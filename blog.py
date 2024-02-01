@@ -29,22 +29,19 @@ def login_required(f):
 
 # Kullanıcı Kayıt Formu
 class RegisterForm(Form):
-    name = StringField("İsim Soyisim", validators=[validators.Length(min=4, max=25)])
-    username = StringField(
-        "Kullanıcı adı", validators=[validators.Length(min=5, max=35)]
-    )
-    email = StringField(
-        "Email adresi",
-        validators=[validators.Email("Lütfen Geçerli Bir Email Adresi Giriniz...")],
-    )
-    password = PasswordField(
-        "Parola:",
-        validators=[
-            validators.DataRequired(message="Lütfen Bir Parola Belirleyin"),
-            validators.EqualTo(fieldname="confirm", message="Parolanız uyuşmuyor"),
-        ],
-    )
-    confirm = PasswordField("Parola Doğrula")
+    name = StringField("İsim-Soyisim: ",validators=[validators.length(min= 2,max=20),validators.DataRequired(message= "Devam etmek için lütfen burayı doldurunuz..!")])
+    username = StringField("Kullanıcı Adı: ",validators=[validators.length(min= 5,max=15),validators.DataRequired(message="Devam etmek için lütfen burayı doldurunuz..!")])
+    email = StringField("E-Posta: ",validators=[validators.Email(message="Lütfen Geçerli Bir E-Posta Adresi Giriniz..!")])
+    password = PasswordField("Parola: ", validators=[
+        validators.length(min=6,max=18,message="Lütfen 6-18 Karakter Arası Bir Şifre Belirleyiniz!"),
+        validators.DataRequired(message= "Burası Boş Bırakılamaz!!"),
+        validators.EqualTo(fieldname="confirm",message="Parolalar Uyuşmuyor!Tekrar Deneyiniz.."),
+        validators.Regexp(
+            regex=r'^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*()-_+=])[A-Za-z0-9!@#$%^&*()-_+=]{6,18}$',
+            message="Şifrenizde en az bir küçük harf, bir büyük harf, bir özel karakter ve bir sayı bulunmalıdır."
+        ),
+    ])
+    confirm = PasswordField("Parolayı Tekrar Giriniz: ")
 
 
 #Login Form
